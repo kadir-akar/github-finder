@@ -29,7 +29,7 @@ function App() {
           {loading && <h3>Loading...</h3>}
           <div className="text-center" style={userStyle}>
             {users.map((user) => (
-              <div className="card text-center">
+              <div className="card text-center" key={user.index}>
                 <img
                   src={user.avatar_url}
                   alt=""
