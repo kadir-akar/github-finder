@@ -1,12 +1,18 @@
-import "./App.css";
+import "./App.scss";
+import { Fragment } from "react";
 import { Navbar } from "./components/layout/Navbar";
-import { UsersItem } from "./components/users/UsersItem";
+import { Users } from "./components/users/Users";
 import Search from "./components/users/Search";
 import { useState } from "react";
 import axios from "axios";
+import { BrowserRouter as Router } from "react-router-dom";
+import { About } from "./components/pages/About";
+import { NavLink } from "react-router-dom";
 function App() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
+  //search github users
   const seachUsers = async (text) => {
     setLoading(true);
     const res = await axios.get(
@@ -14,51 +20,34 @@ function App() {
       &client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}
       &client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
-    // ekleme yap
     setUsers(res.data.items);
     setLoading(false);
   };
-
+  //clear users from state
+  const clearUsers = () => {
+    setUsers([]);
+    setLoading(false);
+  };
   return (
-    <div>
-      <Navbar title="Github-Finder" icon="fab fa-github" />
+    <Fragment>
+      <Navbar title="Github-Finder" icon="fab fa-github m-5" />
+
       <div className="container">
-        <Search seachUsers={seachUsers} />
-        {/* <UsersItem /> */}
-        <div>
-          {loading && <h3>Loading...</h3>}
-          <div className="text-center" style={userStyle}>
-            {users.map((user) => (
-              <div className="card text-center" key={user.index}>
-                <img
-                  src={user.avatar_url}
-                  alt=""
-                  className="round-img"
-                  style={{ width: "60px" }}
-                />
-                <h3>{user.login}</h3>
-                <div>
-                  <a
-                    href={user.html_url}
-                    className="btn btn-dark btn-sm my-1"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    More
-                  </a>
-                </div>
-              </div>
-            ))}
+        <Search
+          seachUsers={seachUsers}
+          clearUsers={clearUsers}
+          setAlert={setAlert}
+          showClear={users.length > 0 ? true : false}
+        />
+        {loading && <h3>Loading...</h3>}
+        {alert && (
+          <div className="alert center">
+            <i className="fas fa-info-circle"></i> {alert}
           </div>
-        </div>
+        )}
+        <Users users={users} />
       </div>
-    </div>
+    </Fragment>
   );
 }
-
-const userStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gridGap: "1rem",
-};
 export default App;

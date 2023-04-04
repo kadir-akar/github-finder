@@ -4,8 +4,15 @@ function Search(props) {
   const [text, setText] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
-    setText("");
-    props.seachUsers(text);
+    if (text === "") {
+      props.setAlert("Please enter something", "light");
+      setTimeout(() => {
+        props.setAlert();
+      }, 2000);
+    } else {
+      setText("");
+      props.seachUsers(text);
+    }
   };
   return (
     <>
@@ -19,6 +26,11 @@ function Search(props) {
         />
         <input type="submit" value="Seach" className="btn btn-dark btn-block" />
       </form>
+      {props.showClear && (
+        <button className="btn btn-light btn-block" onClick={props.clearUsers}>
+          Clear
+        </button>
+      )}
     </>
   );
 }

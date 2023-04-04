@@ -2,7 +2,7 @@ export const Users = (props) => {
   return (
     <div style={userStyle}>
       {props.users.map((user) => (
-        <div key={user.id} className="card">
+        <div key={user.id} className="card text-center">
           <h3>{user.login}</h3>
           <img
             className="round-img"
