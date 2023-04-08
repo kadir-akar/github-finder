@@ -1,25 +1,21 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
-const Search = () => {
+const Search = (props) => {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
-  const seachUsers = async (text) => {
-    setLoading(true);
-    const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}
-      &client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}
-      &client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    );
-    setUsers(res.data.items);
-    setLoading(false);
-  };
+  const [alert, setAlert] = useState(false);
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(text);
-    seachUsers(text);
-    setText("");
+    if (text === "") {
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 2000);
+    } else {
+      props.searchUsers(text);
+      setText("");
+      setUsers([]);
+    }
   };
   return (
     <>
@@ -50,9 +46,45 @@ const Search = () => {
               </svg>
             </button>
           </div>
+          {props.users.length > 0 && (
+            <button
+              className="btn btn-primary btn-sm my-1 mt-3"
+              onClick={props.clearUsers}
+              type="button"
+            >
+              Clear
+            </button>
+          )}
+          {alert && (
+            <div className="alert alert-error mt-3">
+              <div className="flex-1">
+                <label className="label text-x">
+                  <label className="label">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-alert-triangle"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#dc2626"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" />
+                      <path d="M12 9v2m0 4v.01" />
+                      <path d="M12 3L12 3a9 9 0 0 1 9 9l0 0a9 9 0 0 1 -9 9l0 0a9 9 0 0 1 -9 -9l0 0a9 9 0 0 1 9 -9" />
+                    </svg>
+                  </label>
+                  Please enter something!
+                </label>
+              </div>
+            </div>
+          )}
         </div>
       </form>
-      <div className=" grid grid-cols-1 content-center gap-5 xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2  mt- px-4 m-10 flex-col ">
+      <div className=" grid grid-cols-1 content-center gap-5 xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 px-4 m-3 flex-col ">
         {users.map((user) => (
           <div
             key={user.id}
@@ -79,10 +111,5 @@ const Search = () => {
       </div>
     </>
   );
-};
-const userStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(5, 1fr)",
-  gridGap: "1rem",
 };
 export default Search;
