@@ -5,7 +5,7 @@ const Users = (props) => {
   const router = useRouter();
   return (
     <div>
-      <div className=" grid grid-cols-1 content-center gap-5 xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 mt- px-4 m-10 flex-col ">
+      <div className="grid grid-cols-1 content-center gap-5 xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 mt- px-4 m-10 flex-col ">
         {props.users.map((user) => (
           <div
             key={user.id}
