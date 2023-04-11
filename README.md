@@ -21,10 +21,6 @@ In the project directory, run npm start to start the application.
 Navigate to
 `http://localhost:3000`
 in your web browser.
-Browse the menu and click the "Add to Cart" button for items you wish to purchase.
-View your cart by clicking the "Cart" button in the navigation bar.
-Adjust the quantity of items in your cart or remove items entirely.
-Click the "Checkout" button to proceed to the checkout page.
 
 ## Contributing
 
