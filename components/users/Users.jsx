@@ -20,12 +20,13 @@ const Users = (props) => {
             />
             <div className="card-body items-center text-center">
               <p className="card-title mb-5 mt-0">{user.login}</p>
-              <a
+              <Link
                 onClick={() => router.push(`user/${user.login}`)}
                 className="card-title btn text-xl hover:btn-primary"
+                href={`user/${user.login}`}
               >
                 More
-              </a>
+              </Link>
             </div>
           </div>
         ))}

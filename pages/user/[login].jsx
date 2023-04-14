@@ -75,7 +75,6 @@ const SingleUser = ({ userStats }) => {
   );
 };
 export default SingleUser;
-//get repos url
 export const getServerSideProps = async (context) => {
   const res = await fetch(
     `https://api.github.com/users/${context.params.login}`
