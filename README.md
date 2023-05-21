@@ -34,8 +34,7 @@ Open a pull request to merge your changes into the main repository.
 
 - React
 - JavaScript
-- HTML
-- CSS
+- CSS (grid-flex)
 - Next.js
 - daisyUi
 - Tailwind

@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 const Users = (props) => {
+  const userHandler = (e) => {
+    e.preventDefault();
+    router.push(e.target.href);
+  };
+
   const router = useRouter();
   return (
     <div>
@@ -21,7 +25,7 @@ const Users = (props) => {
             <div className="card-body items-center text-center">
               <p className="card-title mb-5 mt-0">{user.login}</p>
               <Link
-                onClick={() => router.push(`user/${user.login}`)}
+                onClick={userHandler}
                 className="card-title btn text-xl hover:btn-primary"
                 href={`user/${user.login}`}
               >

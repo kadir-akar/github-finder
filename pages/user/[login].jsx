@@ -7,9 +7,7 @@ const SingleUser = ({ userStats }) => {
     );
     const data = await res.json();
     setRepos(data);
-    console.log(data);
   };
-
   useEffect(() => {
     getUserRepos(userStats.login);
   }, []);

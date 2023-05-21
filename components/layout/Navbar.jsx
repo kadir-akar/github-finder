@@ -4,11 +4,11 @@ const Navbar = () => {
   return (
     <React.Fragment>
       <div className="navbar bg-neutral text-neutral-content">
-        <div className="flex-1">
+        <Link href="/" className="flex-1">
           <h2 className="normal-case text-xl">
             <i className="fa-brands fa-github fa-xl p-3"></i>Github Finder
           </h2>
-        </div>
+        </Link>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <li>
