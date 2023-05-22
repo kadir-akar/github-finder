@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Link from "next/link";
-import { useState } from "react";
+
 const about = () => {
   return (
     <div className="mt-5">

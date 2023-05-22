@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 const SingleUser = ({ userStats }) => {
   const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(false);
   const getUserRepos = async (username) => {
+    setLoading(true);
     const res = await fetch(
       `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
     const data = await res.json();
     setRepos(data);
+    setLoading(false);
   };
   useEffect(() => {
     getUserRepos(userStats.login);
@@ -72,6 +76,7 @@ const SingleUser = ({ userStats }) => {
     </div>
   );
 };
+
 export default SingleUser;
 export const getServerSideProps = async (context) => {
   const res = await fetch(

@@ -1,8 +1,11 @@
-import Search from "../components/users/Search";
-import Users from "../components/users/Users";
 import axios from "axios";
 import Image from "next/image";
+
+import Search from "../components/users/Search";
+import Users from "../components/users/Users";
+
 import { useState } from "react";
+
 export default function Home() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
