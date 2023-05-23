@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import Alert from "../alertButton/Alert";
 import SearchButton from "../searchButton/SearchButton";
-import User from "../user/User";
 
 const Search = (props) => {
   const [users, setUsers] = useState([]);
@@ -39,11 +38,6 @@ const Search = (props) => {
           {alert && <Alert />}
         </div>
       </form>
-      <div className=" grid grid-cols-1 content-center gap-5 xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 px-4 m-3 flex-col ">
-        {users.map((user) => (
-          <User user={user} key={user.id} />
-        ))}
-      </div>
     </>
   );
 };
